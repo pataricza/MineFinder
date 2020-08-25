@@ -3,7 +3,7 @@ package com.finder.mine.service;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Table {
+public class TableStuff {
 
     private final int width;
     private final int height;
@@ -15,7 +15,7 @@ public class Table {
         Arrays.stream(mines).forEach(m -> System.out.println(Arrays.toString(m)));
     }
 
-    public Table(int width, int height) {
+    public TableStuff(int width, int height) {
         this.width = width;
         this.height = height;
         table = new String[width][height];
@@ -23,27 +23,6 @@ public class Table {
         mines = new int[10][2];
         generateMines();
         drawTable();
-    }
-
-    private void generateMines() {
-        Random rand = new Random();
-        int counter = 0;
-        while(counter < 10) {
-            int w = rand.nextInt(width);
-            int h = rand.nextInt(height);
-            boolean contains = isMine(w, h);
-            if(!contains) {
-                mines[counter++] = new int[]{w,h};;
-            }
-        }
-    }
-
-    private void fillTable() {
-        for(int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                table[i][j] = "+";
-            }
-        }
     }
 
     private void drawTable() {
