@@ -19,12 +19,12 @@ public class MineFinderController {
   }
 
   @GetMapping("/start")
-  public Table startGame(@RequestParam("width") int width, @RequestParam("height") int height) throws IllegalAccessException {
+  public Table startGame(@RequestParam("width") int width, @RequestParam("height") int height) {
     return mineFinderService.startGame(width, height);
   }
 
   @GetMapping("/table")
-  public Table getTable() throws IllegalAccessException {
+  public Table getTable() {
     return mineFinderService.getTable();
   }
 

@@ -1,21 +1,26 @@
 package com.finder.mine.model;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.Random;
 
+@Getter
 public class Table {
+
+  private static final int ASCII = 48;
 
   private static Table TABLE;
 
-  private int width;
-  private int height;
-  private char[][] table;
-  private int[][] mines;
+  private final int width;
+  private final int height;
+  private final char[][] fields;
+  private final int[][] mines;
 
   private Table(int width, int height) {
     this.width = width;
     this.height = height;
-    table = new char[width][height];
+    fields = new char[width][height];
     mines = new int[10][2];
     fillTable();
     generateMines();
@@ -32,10 +37,22 @@ public class Table {
     return TABLE;
   }
 
+  public void setFieldToEmpty(int width, int height) {
+    fields[width][height] = ' ';
+  }
+
+  public void setFieldToNumberOfMines(int width, int height, int numberOfMines) {
+    fields[width][height] = (char) (ASCII + numberOfMines);
+  }
+
+  public void setFieldToMine(int width, int height) {
+    fields[width][height] = 'M';
+  }
+
   private void fillTable() {
     for(int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
-        table[i][j] = '+';
+        fields[i][j] = '+';
       }
     }
   }
