@@ -4,6 +4,7 @@ import com.finder.mine.service.MineFinderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin("*")
@@ -17,8 +18,18 @@ public class MineFinderController {
     this.mineFinderService = mineFinderService;
   }
 
+  @GetMapping("/start")
+  public Table startGame(@RequestParam("width") int width, @RequestParam("height") int height) throws IllegalAccessException {
+    return mineFinderService.startGame(width, height);
+  }
+
   @GetMapping("/table")
-  public Table getTable() {
+  public Table getTable() throws IllegalAccessException {
     return mineFinderService.getTable();
+  }
+
+  @GetMapping("/step")
+  public Table takeStep(@RequestParam("width") int width, @RequestParam("height") int height) {
+    return mineFinderService.takeStep(width, height);
   }
 }
